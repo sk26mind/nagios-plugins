@@ -77,15 +77,18 @@ foreach (@stats){
     $stats{$name}=$state;
 }
 
-$msg = "yarn apps stats for cluster: \n";
+$msg = "All apps are running.";
 
 foreach my $app (@apps) {
     next if length($app) == 0;
     $state = lc($stats{lc($app)});
     if($state ne "running"){
-        $msg .= "$app is NOT RUNNING, it's $state!\n";
+        if ($status ne "CRITICAL") {
+            $msg = "App(s) not running: "
+            $status = "CRITICAL";
+        }
+        $msg .= "$app ";
     }
 }
 
 quit $status, $msg;
-
