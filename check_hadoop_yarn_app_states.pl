@@ -84,7 +84,7 @@ foreach my $app (@apps) {
     $state = lc($stats{lc($app)});
     if($state ne "running"){
         if ($status ne "CRITICAL") {
-            $msg = "App(s) not running: "
+            $msg = "App(s) not running: ";
             $status = "CRITICAL";
         }
         $msg .= "$app ";
